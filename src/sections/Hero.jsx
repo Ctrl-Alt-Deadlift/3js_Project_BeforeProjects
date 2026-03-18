@@ -137,6 +137,7 @@ import HeroCamera from '../components/HeroCamera.jsx';
 import { calculateSizes } from '../constants/index.js';
 import { HackerRoom } from '../components/HackerRoom.jsx';
 import TypewriterComponent from 'typewriter-effect';
+import WireSphere from "../components/WireSphere";
 
 const Hero = () => {
   const isSmall = useMediaQuery({ maxWidth: 440 });
@@ -172,9 +173,12 @@ const Hero = () => {
         {/* Conditional rendering based on the screen size */}
         {isMobile ? (
           // Show GIF for mobile devices
-          <div className="flex justify-center items-center w-full h-full mt-[50px]">
-            <img src={Animation2} alt="GIF Animation" className="max-w-full max-h-full rounded-xl" />
-          </div>
+          <div className="relative w-full h-full">
+        {/* GIF */}
+        <div className="flex justify-center items-center w-full h-full mt-[50px]">
+          <img src={Animation2} className="max-w-full max-h-full rounded-xl" />
+        </div>
+    </div>
         ) : (
           // Show 3D models for larger screens
           <Canvas className="w-full h-full">
@@ -185,10 +189,10 @@ const Hero = () => {
                 <HackerRoom scale={sizes.deskScale} position={sizes.deskPosition} rotation={[0.1, -Math.PI, 0]} />
               </HeroCamera>
               <group>
-                <Target position={sizes.targetPosition} isMobile={isMobile} />
                 <ReactLogo position={sizes.reactLogoPosition} />
                 <Rings position={sizes.ringPosition} />
                 <Cube position={sizes.cubePosition} isMobile={isMobile} />
+                  <WireSphere position={[-10,-5, 0]} />
               </group>
               <ambientLight intensity={1} />
               <directionalLight position={[10, 10, 10]} intensity={0.1} />
